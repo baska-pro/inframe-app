@@ -1,0 +1,53 @@
+name: Bug report
+description: Laporkan masalah pada InFrame App.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Terima kasih. Jangan sertakan token, cookie, deployment secret, atau data sensitif.
+  - type: input
+    id: version
+    attributes:
+      label: Versi / commit
+      placeholder: v1.0.0 atau SHA commit
+    validations:
+      required: true
+  - type: dropdown
+    id: target
+    attributes:
+      label: Jenis target
+      options:
+        - Google Apps Script Web App
+        - Website / web app lain
+        - Belum diketahui
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Masalah
+      description: Jelaskan apa yang terjadi dan hasil yang diharapkan.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Cara reproduksi
+      placeholder: |
+        1. Buka ...
+        2. Atur ...
+        3. Terjadi ...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Browser, OS, device, deployment platform, konfigurasi VITE_* tanpa secret.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log / screenshot
+      description: Tempel log relevan atau screenshot. Hapus informasi sensitif terlebih dahulu.

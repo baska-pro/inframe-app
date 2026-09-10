@@ -3,6 +3,25 @@
   "private": true,
   "version": "1.0.0",
   "description": "Universal full-screen URL wrapper with first-class Google Apps Script support.",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Lathif Baska",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baska-pro/inframe-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/baska-pro/inframe-app/issues"
+  },
+  "homepage": "https://github.com/baska-pro/inframe-app#readme",
+  "keywords": [
+    "google-apps-script",
+    "apps-script",
+    "iframe",
+    "url-wrapper",
+    "vite",
+    "react",
+    "vercel"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,15 +31,15 @@
     "check": "npm run lint && npm run build"
   },
   "dependencies": {
-    "lucide-react": "^1.43.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "lucide-react": "1.43.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "@types/node": "22.14.0",
+    "@vitejs/plugin-react": "5.0.0",
+    "typescript": "5.8.2",
+    "vite": "6.2.0"
   },
   "engines": {
     "node": ">=20"
