@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">InFrame App</title>
+  <desc id="desc">Universal URL wrapper for Google Apps Script and embeddable web apps.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061018"/>
+      <stop offset="1" stop-color="#0d2330"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="46"/></filter>
+  </defs>
+  <rect width="1280" height="420" rx="28" fill="url(#bg)"/>
+  <circle cx="1080" cy="70" r="165" fill="#14b8a6" opacity=".15" filter="url(#blur)"/>
+  <circle cx="160" cy="390" r="180" fill="#0ea5e9" opacity=".12" filter="url(#blur)"/>
+  <g transform="translate(86 86)">
+    <rect x="0" y="0" width="236" height="190" rx="24" fill="#0b1c27" stroke="#264352" stroke-width="2"/>
+    <circle cx="30" cy="27" r="5" fill="#5eead4"/>
+    <circle cx="48" cy="27" r="5" fill="#38bdf8" opacity=".7"/>
+    <circle cx="66" cy="27" r="5" fill="#64748b" opacity=".7"/>
+    <rect x="24" y="52" width="188" height="113" rx="13" fill="#071018" stroke="#16303d"/>
+    <rect x="45" y="78" width="146" height="10" rx="5" fill="url(#accent)" opacity=".9"/>
+    <rect x="45" y="103" width="100" height="8" rx="4" fill="#405766"/>
+    <rect x="45" y="122" width="124" height="8" rx="4" fill="#243d4b"/>
+    <path d="M178 177l40 0M198 157l20 20-20 20" fill="none" stroke="#5eead4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(382 105)">
+    <text x="0" y="54" fill="#f8fafc" font-size="58" font-family="Inter,Segoe UI,sans-serif" font-weight="800">InFrame App</text>
+    <text x="0" y="102" fill="#87a3b3" font-size="23" font-family="Inter,Segoe UI,sans-serif">Universal URL Wrapper · Google Apps Script Ready</text>
+    <rect x="0" y="137" width="170" height="38" rx="19" fill="#12353a" stroke="#245e60"/>
+    <text x="24" y="162" fill="#7ff3df" font-size="16" font-family="Inter,Segoe UI,sans-serif" font-weight="700">FULL SCREEN</text>
+    <rect x="184" y="137" width="204" height="38" rx="19" fill="#102d3e" stroke="#20516b"/>
+    <text x="208" y="162" fill="#7dd3fc" font-size="16" font-family="Inter,Segoe UI,sans-serif" font-weight="700">GAS AUTO CROP</text>
+    <rect x="402" y="137" width="186" height="38" rx="19" fill="#162a38" stroke="#30495a"/>
+    <text x="426" y="162" fill="#cbd5e1" font-size="16" font-family="Inter,Segoe UI,sans-serif" font-weight="700">VERCEL READY</text>
+  </g>
+</svg>

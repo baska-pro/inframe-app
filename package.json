@@ -1,13 +1,15 @@
 {
-  "name": "lavi-finance",
+  "name": "inframe-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Universal full-screen URL wrapper with first-class Google Apps Script support.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "check": "npm run lint && npm run build"
   },
   "dependencies": {
     "lucide-react": "^1.43.0",
@@ -19,5 +21,8 @@
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

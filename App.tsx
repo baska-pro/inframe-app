@@ -1,69 +1,105 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { ExternalLink, RefreshCw, Settings2 } from 'lucide-react';
 import { Loader } from './components/Loader';
-
-const TARGET_URL = "https://script.google.com/macros/s/AKfycbzEnIp7_1GOANolVhNdFffzx1pJ461PJcs4Pz_PNylR-jIkg4e6Eqkzg6-ssDCnKAKw/exec";
+import {
+  getFrameOffsetTop,
+  resolveTargetUrl,
+  wrapperConfig,
+} from './config';
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [iframeKey, setIframeKey] = useState(0);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const targetUrl = useMemo(() => resolveTargetUrl(), []);
+  const frameOffsetTop = useMemo(
+    () => (targetUrl ? getFrameOffsetTop(targetUrl) : 0),
+    [targetUrl],
+  );
+  const [isLoading, setIsLoading] = useState(Boolean(targetUrl));
+  const [frameKey, setFrameKey] = useState(0);
 
-  const handleReload = useCallback(() => {
+  useEffect(() => {
+    document.title = wrapperConfig.appTitle;
+  }, []);
+
+  const reloadFrame = useCallback(() => {
+    if (!targetUrl) return;
     setIsLoading(true);
-    if (iframeRef.current) {
-      try {
-        iframeRef.current.src = TARGET_URL;
-      } catch {
-        // Cross-origin fallback
+    setFrameKey((value) => value + 1);
+  }, [targetUrl]);
+
+  const openExternal = useCallback(() => {
+    if (!targetUrl) return;
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+  }, [targetUrl]);
+
+  if (!targetUrl) {
+    return (
+      <main className="setup-page">
+        <section className="setup-card" aria-labelledby="setup-title">
+          <div className="setup-icon" aria-hidden="true">
+            <Settings2 size={28} />
+          </div>
+          <p className="eyebrow">INFRAME APP</p>
+          <h1 id="setup-title">Target URL belum dikonfigurasi</h1>
+          <p>
+            Tambahkan <code>VITE_TARGET_URL</code> pada environment variable,
+            lalu deploy ulang aplikasi.
+          </p>
+          <pre>VITE_TARGET_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec</pre>
+          <p className="setup-note">
+            Lihat README untuk konfigurasi Google Apps Script, Vercel, crop banner,
+            forwarding parameter, dan mode URL override.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
+  const frameStyle: React.CSSProperties = frameOffsetTop
+    ? {
+        height: `calc(100% + ${frameOffsetTop}px)`,
+        transform: `translateY(-${frameOffsetTop}px)`,
       }
-    }
-    setIframeKey(prev => prev + 1);
-  }, []);
-
-  const handleOpenExternal = useCallback(() => {
-    window.open(TARGET_URL, '_blank', 'noopener,noreferrer');
-  }, []);
-
-  const handleIframeLoad = () => {
-    setIsLoading(false);
-  };
+    : undefined;
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-slate-950 text-slate-100 flex flex-col relative select-none">
-      {/* Loading Progress Bar at top */}
-      {isLoading && (
-        <div className="w-full h-1 bg-slate-800 overflow-hidden absolute top-0 left-0 right-0 z-40">
-          <div className="h-full bg-gradient-to-r from-teal-500 via-emerald-400 to-cyan-400 w-full animate-pulse transform origin-left" />
-        </div>
-      )}
+    <div className="app-shell">
+      {isLoading && <div className="top-progress" aria-hidden="true" />}
 
-      {/* Main Full-Screen Area */}
-      <main className="flex-1 relative w-full h-full overflow-hidden bg-slate-900">
-        {/* Loader Overlay */}
+      <main className="frame-stage">
         {isLoading && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-950/85 backdrop-blur-sm">
-            <Loader
-              currentUrl={TARGET_URL}
-              onOpenExternal={handleOpenExternal}
-              onRetry={handleReload}
-            />
-          </div>
+          <Loader
+            appTitle={wrapperConfig.appTitle}
+            currentUrl={targetUrl}
+            timeoutSeconds={wrapperConfig.loadingHelpAfterSeconds}
+            onOpenExternal={openExternal}
+            onRetry={reloadFrame}
+          />
         )}
 
-        {/* Pure Clean Full-Screen Iframe */}
         <iframe
-          key={iframeKey}
-          ref={iframeRef}
-          src={TARGET_URL}
-          className={`w-full h-full border-0 transition-opacity duration-300 ${
-            isLoading ? 'opacity-0' : 'opacity-100'
-          }`}
-          onLoad={handleIframeLoad}
-          title="Portal KOMIDA"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation allow-downloads allow-storage-access-by-user-activation allow-presentation allow-orientation-lock"
-          allow="accelerometer; ambient-light-sensor; autoplay; camera; clipboard-read; clipboard-write; display-capture; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; magnetometer; microphone; midi; payment; picture-in-picture; screen-wake-lock; speaker-selection; sync-xhr; usb; web-share"
-          referrerPolicy="no-referrer-when-downgrade"
+          key={frameKey}
+          src={targetUrl}
+          title={wrapperConfig.appTitle}
+          className={`app-frame ${isLoading ? 'is-loading' : 'is-ready'}`}
+          style={frameStyle}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
+          sandbox={wrapperConfig.disableSandbox ? undefined : wrapperConfig.sandbox}
+          allow={wrapperConfig.permissionsPolicy}
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
         />
+
+        {!isLoading && wrapperConfig.showControls && (
+          <div className="floating-controls" aria-label="Kontrol halaman">
+            <button type="button" onClick={reloadFrame} title="Muat ulang">
+              <RefreshCw size={16} />
+            </button>
+            <button type="button" onClick={openExternal} title="Buka URL asli">
+              <ExternalLink size={16} />
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );
