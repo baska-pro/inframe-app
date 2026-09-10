@@ -1,0 +1,12 @@
+{
+  "name": "Portal KOMIDA",
+  "description": "Portal dan penampil aplikasi web KOMIDA responsif dengan navigasi cepat",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
