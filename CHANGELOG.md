@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- BASKA-PRO Personal Use License v1.0.
+- Dependabot monitoring for npm and GitHub Actions.
+- CodeQL JavaScript/TypeScript security analysis.
+- Pull-request dependency review.
+- Automated tag-based GitHub Release workflow with ZIP and SHA-256 checksum.
+- Issue forms, pull-request template, CODEOWNERS, contribution, support, and security documentation.
+- Ready-to-copy environment presets for public GAS, authenticated GAS, and generic iframe targets.
+- Minimal Google Apps Script integration example.
+
+### Changed
+- Pinned direct npm dependency versions for more predictable installations.
+- Hardened CI with concurrency cancellation and job timeout.
+- Expanded package metadata for repository discovery and maintenance.
+
 ## 1.0.0 - 2026-09-10
 
 ### Added

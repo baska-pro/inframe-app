@@ -9,9 +9,14 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,4 +31,5 @@ jobs:
       - name: Build
         env:
           VITE_TARGET_URL: https://script.google.com/macros/s/CI_PLACEHOLDER/exec
+          VITE_APP_TITLE: InFrame CI
         run: npm run build

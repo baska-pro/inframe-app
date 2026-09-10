@@ -1,0 +1,38 @@
+name: Feature request
+description: Usulkan fitur atau peningkatan InFrame App.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Masalah yang ingin diselesaikan
+      description: Jelaskan kebutuhan atau keterbatasan yang sedang ditemui.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solusi yang diusulkan
+      description: Jelaskan perilaku atau konfigurasi yang diinginkan.
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Area
+      options:
+        - Google Apps Script
+        - Iframe / compatibility
+        - Security
+        - UI / UX
+        - Deployment
+        - Documentation
+        - Lainnya
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatif
+      description: Jika ada, jelaskan solusi lain yang sudah dicoba.
