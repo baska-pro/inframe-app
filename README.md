@@ -24,7 +24,7 @@ Universal full-screen URL wrapper untuk menampilkan web app di balik URL/domain 
 - Sandbox iframe aman secara default.
 - Preset konfigurasi untuk GAS publik, GAS dengan login, dan target generic.
 - Siap Vercel.
-- CI, CodeQL, dependency review, Dependabot, dan release automation.
+- CI, CodeQL, Dependabot, dan release automation.
 - Issue forms, PR template, CODEOWNERS, security policy, dan contribution guide.
 
 ## Quick start
@@ -214,9 +214,10 @@ Runtime URL override dinonaktifkan secara default dan harus dibatasi dengan allo
 Security maintenance repository mencakup:
 
 - CodeQL untuk JavaScript/TypeScript;
-- dependency review pada pull request;
 - Dependabot untuk npm dan GitHub Actions;
 - CODEOWNERS untuk file sensitif repository.
+
+GitHub Dependency Review dapat ditambahkan nanti setelah **Dependency Graph** repository diaktifkan. Workflow tersebut tidak dipaksakan sekarang agar checks tidak selalu gagal karena fitur repository yang belum aktif.
 
 ## Troubleshooting
 
